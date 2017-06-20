@@ -55,7 +55,8 @@ Overview
 
 .. end-badges
 
-A ZSL jwt implementation
+JWT implementation for ZSL framework. This modules adds security
+possibilities to ZSL.
 
 * Free software: BSD license
 

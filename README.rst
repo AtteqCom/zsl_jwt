@@ -72,9 +72,9 @@ Just add `zsl_jwt` to your requirements or use
 Usage
 =====
 
-Add :class:`zsl_jwt.JWTModule` to the modules in your `IoCContainer`
-and provide a :class:`zsl_jwt.JWTConfiguration` in your configuration
-under `JWT` variable.
+Add `zsl_jwt.module.JWTModule` to the modules in your `IoCContainer`
+and provide a `zsl_jwt.configuration.JWTConfiguration` in your
+configuration under `JWT` variable.
 
 Documentation
 =============

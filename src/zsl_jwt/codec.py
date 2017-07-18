@@ -6,20 +6,24 @@ The module provides the two main functions :func:`.encode` and :func:`.decode`
 which encode and decode the given payload.
 """
 
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
-
-from typing import Dict
-from typing import Mapping
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import datetime
-import jwt
+from builtins import *  # NOQA
+from typing import Dict  # NOQA
+from typing import Mapping  # NOQA
 
-from zsl import inject, Injected
+import jwt
+from zsl import Injected
+from zsl import inject
 from zsl.db.model.app_model_json_encoder import AppModelJSONEncoder
 from zsl.errors import ZslError
-from zsl_jwt.configuration import DEFAULT_PROFILE_NAME, JWTConfiguration
+
+from zsl_jwt.configuration import DEFAULT_PROFILE_NAME
+from zsl_jwt.configuration import JWTConfiguration
 
 #: The list of JWT claim names.
 CLAIMS = ('exp', 'nbf', 'iss', 'aud', 'iat')

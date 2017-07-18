@@ -3,12 +3,14 @@
 ----------------------------
 """
 
-from __future__ import (absolute_import, division,
-                        print_function, unicode_literals)
-from builtins import *
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import datetime
-from typing import Dict
+from builtins import *  # NOQA
+from typing import Dict  # NOQA
 
 from zsl.errors import ZslError
 
@@ -22,7 +24,7 @@ CLAIM_EXPIRATION = datetime.timedelta(hours=1)
 class JWTConfiguration(object):
     """
     The main JWT configuration object. Consists of several token profiles
-    used for encoding/decoding. See :class:`.JWTProfile`.
+    used for encoding/decoding. See :class:`zsl_jwt.configuration.JWTProfile`.
     """
 
     def __init__(self, default_secret=None, default_profile=None,

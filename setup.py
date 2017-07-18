@@ -63,7 +63,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     install_requires=[
-        'zsl>=0.15.7',
+        'zsl>=0.15',
         'Jinja2',
         'PyYAML',
         'future',

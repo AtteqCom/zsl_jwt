@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import os
-
+import sys
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -51,3 +51,5 @@ html_short_title = '%s-%s' % (project, version)
 napoleon_use_ivar = True
 napoleon_use_rtype = False
 napoleon_use_param = False
+
+sys.path = [os.path.join(os.path.dirname(__file__), '..', 'src')] + sys.path

@@ -2,4 +2,4 @@
 Authors
 =======
 
-* Martin Babka - www.atteq.com
+* Martin Babka - babka@atteq.com, www.atteq.com

@@ -63,14 +63,23 @@ possibilities to ZSL.
 Installation
 ============
 
+Just add `zsl_jwt` to your requirements or use
 ::
 
     pip install zsl-jwt
 
+
+Usage
+=====
+
+Add :class:`zsl_jwt.JWTModule` to the modules in your `IoCContainer`
+and provide a :class:`zsl_jwt.JWTConfiguration` in your configuration
+under `JWT` variable.
+
 Documentation
 =============
 
-https://zsl_jwt.readthedocs.io/
+See more in https://zsl_jwt.readthedocs.io/
 
 Development
 ===========

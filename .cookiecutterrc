@@ -33,7 +33,7 @@ default_context:
     landscape:                 'no'
     package_name:              'zsl_jwt'
     project_name:              'zsl_jwt'
-    project_short_description: 'A ZSL jwt implementation'
+    project_short_description: 'A JWT implementation for ZSL'
     release_date:              'today'
     repo_name:                 'zsl_jwt'
     requiresio:                'no'

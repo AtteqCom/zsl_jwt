@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='zsl_jwt',
-    version='0.1.1',
+    version='0.1.2',
     license='BSD',
     description='A JWT implementation for ZSL',
     long_description='%s\n%s' % (

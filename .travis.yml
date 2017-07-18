@@ -51,7 +51,7 @@ deploy:
     distributions: sdist
     repo: AtteqCom/zsl_jwt
 deploy:
-  server: https://testpypi.python.org/pypi
+  server: https://test.pypi.org/legacy/
   provider: pypi
   user: atteq
   password:

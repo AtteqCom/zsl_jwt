@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.1.3 (2017-07-19)
+------------------
+
+* Algorithm setting is moved to JWTProfile.
+
 0.1.2 (2017-07-18)
 ------------------
 

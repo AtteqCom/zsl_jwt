@@ -15,6 +15,8 @@ from typing import Dict  # NOQA
 from zsl.errors import ZslError
 
 DEFAULT_PROFILE_NAME = 'default'
+DEFAULT_ALGORITHM = 'HS256'
+
 CLAIM_ISSUER = 'zsl_jwt'
 CLAIM_AUDIENCE = 'zsl_jwt'
 CLAIM_NOT_BEFORE = datetime.timedelta(seconds=0)
@@ -61,8 +63,8 @@ class JWTProfile(object):
     """
 
     def __init__(self, secret, expiration=None, not_before=None, issuer=CLAIM_ISSUER,
-                 audience=CLAIM_AUDIENCE):
-        # type:(str, datetime.timedelta, datetime.timedelta, str, str)->None
+                 audience=CLAIM_AUDIENCE, algorithm=DEFAULT_ALGORITHM):
+        # type:(str, datetime.timedelta, datetime.timedelta, str, str, str)->None
         if expiration is None:
             expiration = CLAIM_EXPIRATION
         if not_before is None:
@@ -72,6 +74,11 @@ class JWTProfile(object):
         self._not_before = not_before
         self._issuer = issuer
         self._audience = audience
+        self._algorithm = algorithm
+
+    @property
+    def algorithm(self):
+        return self._algorithm
 
     @property
     def secret(self):

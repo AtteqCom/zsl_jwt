@@ -49,8 +49,7 @@ class ZslJwtInvalidNbfClaimError(ZslError):
 
 
 @inject(jwt_configuration=JWTConfiguration)
-def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected,
-           algorithm='HS256'):
+def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
     # type: (Dict[str, str], str, JWTConfiguration, str)->str
     """
     Encodes the payload.
@@ -62,8 +61,9 @@ def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected,
     :return: The JWT token.
     """
     payload = _append_claims(payload, profile)
-    token = jwt.encode(payload, jwt_configuration[profile].secret, json_encoder=AppModelJSONEncoder,
-                       algorithm=algorithm)
+    profile = jwt_configuration[profile]
+    token = jwt.encode(payload, profile.secret, json_encoder=AppModelJSONEncoder,
+                       algorithm=profile.algorithm)
     return token
 
 

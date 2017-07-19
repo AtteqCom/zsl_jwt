@@ -16,6 +16,7 @@ from builtins import *  # NOQA
 from typing import Dict  # NOQA
 from typing import Mapping  # NOQA
 
+import binascii
 import jwt
 from zsl import Injected
 from zsl import inject
@@ -64,6 +65,7 @@ def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
     profile = jwt_configuration[profile]
     token = jwt.encode(payload, profile.secret, json_encoder=AppModelJSONEncoder,
                        algorithm=profile.algorithm)
+    token = token.decode('ascii')
     return token
 
 

@@ -59,7 +59,8 @@ class JWTProfile(object):
      - audience: `str` - must match the audience in the decoding,
      - issuer name: `str` - just an information about the token issuer,
      - expiration: `datetime.timedelta` specifying when token becomes invalid,
-     - not_before: `datetime.timedelta` specifying when token becomes valid.
+     - not_before: `datetime.timedelta` specifying when token becomes valid,
+     - algorithm: encryption algorithm used to create the token.
     """
 
     def __init__(self, secret, expiration=None, not_before=None, issuer=CLAIM_ISSUER,

@@ -31,6 +31,7 @@ ERROR_MESSAGE_INVALID_CREDENTIALS = "Username and password can not be verified."
 
 @inject(authentication_service=AuthenticationService)
 def authenticate(username, password, authentication_service):
+    # type: (str, str, AuthenticationService)->str
     """
     the "login" function, from the given username/password returns the jwt.
 

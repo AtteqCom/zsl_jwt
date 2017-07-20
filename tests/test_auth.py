@@ -11,7 +11,8 @@ from zsl.testing.zsl import ZslTestConfiguration
 from zsl_jwt.auth.configuration import AuthConfiguration
 from zsl_jwt.auth.controller import authenticate
 from zsl_jwt.auth.module import AuthModule
-from zsl_jwt.auth.service import AuthenticationService, decode_to_standard_user_information
+from zsl_jwt.auth.service import AuthenticationService
+from zsl_jwt.auth.service import decode_to_standard_user_information
 from zsl_jwt.configuration import JWTConfiguration
 from zsl_jwt.module import JWTModule
 

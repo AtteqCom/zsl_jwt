@@ -13,17 +13,16 @@ from __future__ import unicode_literals
 from abc import ABCMeta
 from abc import abstractmethod
 from builtins import *  # NOQA
-from typing import Any, TypeVar  # NOQA
+from typing import Any  # NOQA
 from typing import Callable  # NOQA
-from typing import Generic
+from typing import Generic  # NOQA
 from typing import List  # NOQA
+from typing import Set  # NOQA
 from typing import Tuple  # NOQA
+from typing import TypeVar  # NOQA
 
-from typing import Set
-
-from storage.models.persistent import UserRole
-from zsl.db.helpers.nested import nested_model
 from zsl.db.model.app_model import AppModel
+
 from zsl_jwt.codec import decode
 from zsl_jwt.configuration import DEFAULT_PROFILE_NAME
 
@@ -87,9 +86,9 @@ class StandardUserInformation(AppModel, Generic[T]):
         # type: ()->Set[str]
         return self._roles
 
-    def is_in_role(self, role: UserRole):
-        # type:(UserRole)->bool
-        return role.value in self._roles
+    def is_in_role(self, role):
+        # type:(str)->bool
+        return role in self._roles
 
     @property
     def user_object(self):

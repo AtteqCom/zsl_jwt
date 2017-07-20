@@ -13,8 +13,8 @@ from __future__ import unicode_literals
 
 import datetime
 from builtins import *  # NOQA
+from typing import Any  # NOQA
 from typing import Dict  # NOQA
-from typing import Mapping  # NOQA
 
 import jwt
 from zsl import Injected
@@ -70,7 +70,7 @@ def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
 
 @inject(jwt_configuration=JWTConfiguration)
 def decode(token, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
-    # type: (str, str, JWTConfiguration)->Mapping
+    # type: (str, str, JWTConfiguration)->Dict[str, Any]
     """
     Decodes the encoded token.
 

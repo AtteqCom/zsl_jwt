@@ -36,9 +36,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/zsl-jwt
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/AtteqCom/zsl_jwt/v0.1.4.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/AtteqCom/zsl_jwt/v0.1.5.svg
     :alt: Commits since latest release
-    :target: https://github.com/AtteqCom/zsl_jwt/compare/v0.1.4...master
+    :target: https://github.com/AtteqCom/zsl_jwt/compare/v0.1.5...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/zsl-jwt.svg
     :alt: PyPI Wheel

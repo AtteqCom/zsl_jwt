@@ -10,18 +10,19 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from builtins import *  # NOQA
-
 import http
+from builtins import *  # NOQA
 
 from zsl import inject
 from zsl.application.error_handler import ErrorResponse
-from zsl.task.job_context import add_responder, StatusCodeResponder
+from zsl.task.job_context import StatusCodeResponder
+from zsl.task.job_context import add_responder
 from zsl.task.task_decorator import json_output
 from zsl.utils.http import get_http_status_code_value
 
-from zsl_jwt.auth.service import AuthenticationService, create_standard_user_information
-from zsl_jwt.auth.service import StandardUserInformation
+from zsl_jwt.auth.service import AuthenticationService
+from zsl_jwt.auth.service import StandardUserInformation  # NOQA
+from zsl_jwt.auth.service import create_standard_user_information
 from zsl_jwt.decorators import jwt_output
 
 ERROR_CODE_INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'

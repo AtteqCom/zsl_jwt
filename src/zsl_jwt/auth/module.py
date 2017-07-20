@@ -15,10 +15,11 @@ from __future__ import unicode_literals
 from builtins import *  # NOQA
 
 from flask.config import Config
-from injector import Module, provides
-
+from injector import Module
+from injector import provides
 from zsl import inject
 from zsl.utils.import_helper import fetch_class
+
 from zsl_jwt.auth.configuration import AuthConfiguration
 from zsl_jwt.auth.service import AuthenticationService
 

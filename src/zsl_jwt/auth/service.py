@@ -10,12 +10,12 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from abc import ABCMeta
+from abc import abstractmethod
 from builtins import *  # NOQA
-
-from abc import ABCMeta, abstractmethod
-from typing import Any
-from typing import List
-from typing import Tuple
+from typing import Any  # NOQA
+from typing import List  # NOQA
+from typing import Tuple  # NOQA
 
 from zsl.db.model.app_model import AppModel
 

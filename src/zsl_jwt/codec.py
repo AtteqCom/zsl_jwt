@@ -16,7 +16,6 @@ from builtins import *  # NOQA
 from typing import Dict  # NOQA
 from typing import Mapping  # NOQA
 
-import binascii
 import jwt
 from zsl import Injected
 from zsl import inject

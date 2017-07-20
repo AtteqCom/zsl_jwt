@@ -12,14 +12,13 @@ from __future__ import unicode_literals
 
 from builtins import *  # NOQA
 from functools import wraps
-from typing import Callable
+from typing import Callable  # NOQA
 
 from flask.config import Config
-
 from zsl import inject
 from zsl.task.task_decorator import json_output
-from zsl_jwt.codec import encode
 
+from zsl_jwt.codec import encode
 from zsl_jwt.configuration import DEFAULT_PROFILE_NAME
 
 

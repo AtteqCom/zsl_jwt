@@ -10,9 +10,9 @@ from __future__ import unicode_literals
 
 from builtins import *  # NOQA
 
-from flask.config import Config
 from injector import Module
 from injector import provides
+from zsl import Config
 from zsl import inject
 
 from zsl_jwt.configuration import JWTConfiguration

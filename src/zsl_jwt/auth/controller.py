@@ -12,12 +12,12 @@ from __future__ import unicode_literals
 
 import http
 from builtins import *  # NOQA
+from typing import Any  # NOQA
 
 from zsl import inject
 from zsl.application.error_handler import ErrorResponse
 from zsl.task.job_context import StatusCodeResponder
 from zsl.task.job_context import add_responder
-from zsl.task.task_decorator import json_output
 from zsl.utils.http import get_http_status_code_value
 
 from zsl_jwt.auth.service import AuthenticationService
@@ -31,7 +31,7 @@ ERROR_MESSAGE_INVALID_CREDENTIALS = "Username and password can not be verified."
 
 @inject(authentication_service=AuthenticationService)
 def authenticate(username, password, authentication_service):
-    # type: (str, str, AuthenticationService)->str
+    # type: (str, str, AuthenticationService)->Any
     """
     the "login" function, from the given username/password returns the jwt.
 
@@ -49,7 +49,6 @@ def authenticate(username, password, authentication_service):
     return _respond_with_jwt(username, authentication_service)
 
 
-@json_output
 def _respond_with_error():
     # type: ()->ErrorResponse
     add_responder(StatusCodeResponder(get_http_status_code_value(http.client.FORBIDDEN)))

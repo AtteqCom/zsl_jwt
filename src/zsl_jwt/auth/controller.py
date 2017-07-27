@@ -13,6 +13,7 @@ from __future__ import unicode_literals
 import http
 from builtins import *  # NOQA
 from typing import Any  # NOQA
+from typing import Union  # NOQA
 
 from zsl import inject
 from zsl.application.error_handler import ErrorResponse
@@ -31,7 +32,7 @@ ERROR_MESSAGE_INVALID_CREDENTIALS = "Username and password can not be verified."
 
 @inject(authentication_service=AuthenticationService)
 def authenticate(username, password, authentication_service):
-    # type: (str, str, AuthenticationService)->Any
+    # type: (str, str, AuthenticationService)->Union[ErrorResponse,StandardUserInformation]
     """
     The "login" function, from the given username/password returns the JWT.
     Use only as a delegate function in handling of tasks.

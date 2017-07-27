@@ -34,17 +34,17 @@ class ZslJwtError(ZslError):
     pass
 
 
-class ZslJwtInvalidAudienceError(ZslError):
+class ZslJwtInvalidAudienceError(ZslJwtError):
     """When the audience of the token does not match the
     audience of the profile used to decode the token."""
     pass
 
 
-class ZslJwtExpiredSignatureError(ZslError):
+class ZslJwtExpiredSignatureError(ZslJwtError):
     pass
 
 
-class ZslJwtInvalidNbfClaimError(ZslError):
+class ZslJwtInvalidNbfClaimError(ZslJwtError):
     pass
 
 

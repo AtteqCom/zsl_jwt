@@ -33,7 +33,8 @@ ERROR_MESSAGE_INVALID_CREDENTIALS = "Username and password can not be verified."
 def authenticate(username, password, authentication_service):
     # type: (str, str, AuthenticationService)->Any
     """
-    the "login" function, from the given username/password returns the jwt.
+    The "login" function, from the given username/password returns the JWT.
+    Use only as a delegate function in handling of tasks.
 
     :param username:
     :param password:

@@ -1,6 +1,8 @@
 import json
 from unittest.case import TestCase
 
+from zsl.task.job_context import WebJobContext
+
 from zsl.application.containers.container import IoCContainer
 from zsl.application.modules.context_module import DefaultContextModule
 from zsl.application.modules.logger_module import LoggerModule
@@ -9,7 +11,7 @@ from zsl.testing.zsl import ZslTestCase
 from zsl.testing.zsl import ZslTestConfiguration
 
 from zsl_jwt.auth.configuration import AuthConfiguration
-from zsl_jwt.auth.controller import authenticate
+from zsl_jwt.auth.controller import authenticate, ERROR_CODE_INVALID_CREDENTIALS
 from zsl_jwt.auth.module import AuthModule
 from zsl_jwt.auth.service import AuthenticationService
 from zsl_jwt.auth.service import decode_to_standard_user_information
@@ -50,15 +52,17 @@ class TestAuth(ZslTestCase, TestCase):
                                     "message": "Username and password can not be verified."}
 
     def testAuthenticate(self):
-        self.assertEqual(TestAuth.INVALID_CREDENTIALS_RESPONSE,
-                         json.loads(authenticate('john', 'john')),
+        WebJobContext('', '', '', None, None)
+        self.assertEqual(ERROR_CODE_INVALID_CREDENTIALS,
+                         authenticate('john', 'john').code,
                          "Credentials john:john must be invalid")
-        self.assertTrue('token' in json.loads(authenticate('john', 'doe')),
+        self.assertTrue(isinstance(authenticate('john', 'doe'), dict),
+                        'Credentials john:doe should be valid.')
+        self.assertTrue('token' in authenticate('john', 'doe'),
                         'Credentials john:doe should be valid.')
 
     def testDecodeAuthToken(self):
-        token = json.loads(authenticate('john', 'doe'))
-        token = token['token']
+        token = authenticate('john', 'doe')['token']
         user_info = decode_to_standard_user_information(token, MyAppModel)
         self.assertEqual('john', user_info.username)
         self.assertEqual({'role'}, user_info.roles)

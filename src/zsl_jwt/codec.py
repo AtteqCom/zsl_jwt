@@ -81,7 +81,8 @@ def decode(token, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
     """
     try:
         profile = jwt_configuration[profile]
-        payload = jwt.decode(token, profile.secret, audience=profile.audience)
+        payload = jwt.decode(token, profile.secret, audience=profile.audience,
+                             algorithms=[profile.algorithm])
     except jwt.InvalidAudienceError as e:
         raise ZslJwtInvalidAudienceError(e)
     except jwt.ExpiredSignatureError as e:

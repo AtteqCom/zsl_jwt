@@ -106,11 +106,11 @@ def _append_claims(payload, profile, jwt_configuration):
 
     payload = payload.copy()
     profile = jwt_configuration[profile]
-    payload['exp'] = datetime.datetime.utcnow() + profile.expiration
-    payload['nbf'] = datetime.datetime.utcnow() + profile.not_before
+    payload['exp'] = datetime.datetime.now(tz=datetime.timezone.utc) + profile.expiration
+    payload['nbf'] = datetime.datetime.now(tz=datetime.timezone.utc) + profile.not_before
     payload['iss'] = profile.issuer
     payload['aud'] = profile.audience
-    payload['iat'] = datetime.datetime.utcnow()
+    payload['iat'] = datetime.datetime.now(tz=datetime.timezone.utc)
     return payload
 
 

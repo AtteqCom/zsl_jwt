@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]  # Adjust as needed
+    tags: [ 'v*' ]              # Adjust tag pattern as needed
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '2.7', '3.6' ]
+        toxenv: [ check, docs, '2.7-cover,report,coveralls,codecov', '2.7-nocov', '3.6-cover,report,coveralls,codecov', '3.6-nocov' ]
+    env:
+      LD_PRELOAD: /lib/x86_64-linux-gnu/libSegFault.so
+      SEGFAULT_SIGNALS: all
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show system info
+        run: |
+          python --version
+          uname -a
+          lsb_release -a || true
+      
+      - name: Install tox
+        run: pip install tox
+      
+      - name: Show tool versions
+        run: |
+          virtualenv --version
+          easy_install --version
+          pip --version
+          tox --version
+
+      - name: Run tests with tox
+        run: tox -e ${{ matrix.toxenv }}
+        continue-on-error: false
+      
+      - name: Print tox logs on failure
+        if: failure()
+        run: |
+          find .tox -name 'log' -print -exec cat {} \; || true
+          
+  # Deployment job for stable PyPI (on tags)
+  deploy-prod:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.6'
+
+      - name: Build distribution
+        run: |
+          pip install --upgrade pip setuptools wheel twine
+          python setup.py sdist bdist_wheel
+
+      - name: Publish to PyPI
+        run: twine upload dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN }}

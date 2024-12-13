@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ '3.6' ]
-        toxenv: [ check, docs, '3.6-cover,report,coveralls,codecov', '3.6-nocov' ]
+        python-version: [ '3.12' ]
+        toxenv: [ check, docs, '3.12-cover,report,coveralls,codecov', '3.12-nocov' ]
     env:
       LD_PRELOAD: /lib/x86_64-linux-gnu/libSegFault.so
       SEGFAULT_SIGNALS: all
@@ -63,7 +63,7 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
-          python-version: '3.6'
+          python-version: '3.12'
 
       - name: Build distribution
         run: |

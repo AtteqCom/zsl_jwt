@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ '2.7', '3.6' ]
-        toxenv: [ check, docs, '2.7-cover,report,coveralls,codecov', '2.7-nocov', '3.6-cover,report,coveralls,codecov', '3.6-nocov' ]
+        python-version: [ '3.6' ]
+        toxenv: [ check, docs, '3.6-cover,report,coveralls,codecov', '3.6-nocov' ]
     env:
       LD_PRELOAD: /lib/x86_64-linux-gnu/libSegFault.so
       SEGFAULT_SIGNALS: all

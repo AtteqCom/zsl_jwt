@@ -26,7 +26,7 @@ project = 'zsl_jwt'
 year = '2017'
 author = 'Martin Babka'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.1.7'
+version = release = '1.0.0'
 
 pygments_style = 'trac'
 templates_path = ['.']

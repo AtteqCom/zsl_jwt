@@ -63,3 +63,9 @@ docs/_build
 .bootstrap
 .appveyor.token
 *.bak
+
+# venvs
+.venv
+
+# IDEs
+.vscode

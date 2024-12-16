@@ -10,8 +10,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis|
-        | |coveralls| |codecov|
+      - | |coveralls| |codecov|
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
@@ -19,10 +18,6 @@ Overview
 .. |docs| image:: https://readthedocs.org/projects/zsl_jwt/badge/?style=flat
     :target: https://readthedocs.org/projects/zsl_jwt
     :alt: Documentation Status
-
-.. |travis| image:: https://travis-ci.org/AtteqCom/zsl_jwt.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/AtteqCom/zsl_jwt
 
 .. |coveralls| image:: https://coveralls.io/repos/AtteqCom/zsl_jwt/badge.svg?branch=master&service=github
     :alt: Coverage Status
@@ -79,7 +74,7 @@ configuration under `JWT` variable.
 Documentation
 =============
 
-See more in https://zsl_jwt.readthedocs.io/
+See more in https://zsl-jwt.readthedocs.io/
 
 Development
 ===========

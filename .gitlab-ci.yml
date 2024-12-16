@@ -1,0 +1,98 @@
+variables:
+  DOCKER_IMAGE: ${CI_REGISTRY_IMAGE}/python-tox
+  DOCKER_TAG: latest
+default:
+  image: ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+stages:
+  - build-tox-image
+  - test
+  - docs
+  - build
+  - deploy
+
+#
+# Build the Docker image for running tox. It triggers on changes to the Dockerfile or the CI configuration.
+#
+# Most of the time, pipeline jobs will use 'latest' tag. However, when modifying the CI configuration or
+# Dockerfile.tox file, the pipeline will build a new image with branch name as the tag. This will then be
+# used by the pipeline jobs that follow.
+#
+# WARNING: If you commit changes to the branch after your modification for the Dockerfile or CI configuration,
+# the pipeline will use the 'latest' tag again instead of the branch name. Only when you push changes to the
+# Dockerfile or CI configuration will the pipeline use the branch name as the tag.
+#
+build-tox-image:
+  stage: build-tox-image
+  image: docker:26.1.4
+  services:
+    - docker:26.1.4-dind
+  only:
+    changes:
+      - .gitlab-ci.yml
+      - docker/Dockerfile.tox
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" || -n "$CI_COMMIT_TAG" ]]; then
+        export DOCKER_TAG=latest
+      else
+        export DOCKER_TAG=$CI_COMMIT_REF_SLUG
+      fi
+    - echo "Building ${DOCKER_IMAGE}:${DOCKER_TAG}"
+    - docker build
+        -f docker/Dockerfile.tox
+        -t $DOCKER_IMAGE:$DOCKER_TAG
+        .
+    - docker push $DOCKER_IMAGE:$DOCKER_TAG
+    - echo "DOCKER_TAG=${DOCKER_TAG}" >> build.env
+  after_script:
+    - |
+      # List all tags, excluding 'latest'
+      docker images $DOCKER_IMAGE --format "{{.Tag}}" |
+      grep -v "latest" |  # Explicitly exclude 'latest' tag
+      sort -r | tail -n +6 |  # Keep the 5 most recent tags
+      xargs -I {} docker rmi $DOCKER_IMAGE:{}
+  artifacts:
+    reports:
+      dotenv: build.env
+
+test-check:
+  stage: test
+  script:
+    - tox -v -e check
+
+test-py312-nocov:
+  stage: test
+  script:
+    - tox -v -e 3.12-nocov
+
+test-py312-cover:
+  stage: test
+  script:
+    - tox -v -e 3.12-cover
+
+docs:
+  stage: docs
+  script: tox -v -e docs
+
+build:
+  stage: build
+  script: python -m build
+  only:
+    - tags
+  except:
+    - branches
+  artifacts:
+    paths:
+      - dist/*
+    expire_in: 1 week
+
+deploy:
+  stage: deploy
+  script: twine upload --non-interactive dist/*
+  only:
+    - tags
+  except:
+    - branches

@@ -64,7 +64,6 @@ def encode(payload, profile=DEFAULT_PROFILE_NAME, jwt_configuration=Injected):
     profile = jwt_configuration[profile]
     token = jwt.encode(payload, profile.secret, json_encoder=AppModelJSONEncoder,
                        algorithm=profile.algorithm)
-    token = token.decode('ascii')
     return token
 
 
@@ -100,9 +99,7 @@ def _append_claims(payload, profile, jwt_configuration):
     # type: (Dict[str, str], str, JWTConfiguration)->Dict[str, str]
     for claim in CLAIMS:
         if claim in payload:
-            raise ZslJwtError("Claim '%s' found in payload. "
-                              "Please use payloads without "
-                              "claims - %s.".format(claim, CLAIMS))
+            raise ZslJwtError(f"Claim '{claim}' found in payload. Please use payloads without claims - {CLAIMS}.")
 
     payload = payload.copy()
     profile = jwt_configuration[profile]
